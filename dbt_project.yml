@@ -5,7 +5,11 @@ config-version: 2
 profile: 'default'
 
 model-paths: ["models"]
+seed-paths: ["seeds"]
 
 models:
   dbt_training:
-    +materialized: view
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
