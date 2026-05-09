@@ -6,6 +6,3 @@ profile: 'default'
 
 model-paths: ["models"]
 
-models:
-  dbt_training:
-    +materialized: view
