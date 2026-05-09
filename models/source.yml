@@ -2,9 +2,10 @@ version: 2
 
 sources:
   - name: raw
-    database: ANALYTICS
-    schema: dbt_nattu
+    database: raw_analytics
+    schema: raw
 
     tables:
       - name: customers
       - name: orders
+      - name: payments

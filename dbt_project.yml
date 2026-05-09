@@ -2,14 +2,65 @@ name: 'dbt_training'
 version: '1.0'
 config-version: 2
 
-profile: 'default'
+profile: 'dbt_training'
 
+# Paths
 model-paths: ["models"]
 seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
 
+# Build output
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Global model configs
 models:
   dbt_training:
+
+    # RAW layer
+    raw:
+      +materialized: view
+      +database: raw_analytics
+      +schema: raw
+
+    # STAGING layer
     staging:
       +materialized: view
+      +database: stg_analytics
+      +schema: staging
+
+    # MART layer (final tables)
     marts:
       +materialized: table
+      +database: mart_analytics
+      +schema: mart
+
+seeds:
+  dbt_training:
+    +database: raw_analytics
+    +schema: seed_data
+
+    customer:
+      +column_types:
+        id: integer
+        first_name: string
+        last_name: string
+
+    orders:
+      +column_types:
+        id: integer
+        user_id: integer
+        order_date: date
+        status: string
+
+    payments:
+      +column_types:
+        id: integer
+        order_id: integer
+        payment_method: string
+        amount: number
