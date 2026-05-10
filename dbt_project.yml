@@ -5,4 +5,19 @@ config-version: 2
 profile: 'default'
 
 model-paths: ["models"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  dbt-training:
+    +database: raw_analytics
+    +schema: seed_data
 
