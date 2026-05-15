@@ -1,25 +1,12 @@
-with source as (
-    
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
+  
+with raw_payments_v as 
+(
     select * from {{ ref('raw_payments_v') }}
-
-),
-
-renamed as (
-
-    select
-        id as payment_id,
-        order_id,
-        payment_method,
-
-        -- `amount` is currently stored in cents, so we convert it to dollars
-        amount / 100 as amount
-
-    from source
-
 )
 
-select * from renamed
+select 
+    try_to_number(id) as payment_id,
+    try_to_number(order_id),
+    payment_method,
+    try_to_number(amount) as amount
+from raw_payments_v

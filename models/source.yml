@@ -1,11 +1,11 @@
 version: 2
 
 sources:
-  - name: raw
+  - name: raw_1
     database: raw_analytics
     schema: raw
 
     tables:
-      - name: customers
-      - name: orders
-      - name: payments
+      - name: raw_customers
+      - name: raw_orders
+      - name: raw_payments

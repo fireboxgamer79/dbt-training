@@ -18,23 +18,19 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
-# Global model configs
 models:
   dbt_training:
 
-    # RAW layer
     raw:
       +materialized: view
       +database: raw_analytics
       +schema: raw
 
-    # STAGING layer
     staging:
-      +materialized: view
+      +materialized: table
       +database: stg_analytics
       +schema: staging
 
-    # MART layer (final tables)
     marts:
       +materialized: table
       +database: mart_analytics
