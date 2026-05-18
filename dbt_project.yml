@@ -20,28 +20,21 @@ clean-targets:
 
 models:
   dbt_training:
-
     raw:
       +materialized: view
       +database: raw_analytics
       +schema: raw
-
-    staging:
+    stg:
       +materialized: table
       +database: stg_analytics
-      +schema: staging
-
-    marts:
-      +materialized: table
-      +database: mart_analytics
-      +schema: mart
+      +schema: stg
 
 seeds:
   dbt_training:
     +database: raw_analytics
     +schema: seed_data
 
-    customer:
+    customers:
       +column_types:
         id: integer
         first_name: string

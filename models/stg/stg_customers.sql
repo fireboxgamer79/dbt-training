@@ -1,11 +1,13 @@
 
-with raw_customers_v as 
+with raw_customers_v as
 (
     select * from {{ ref('raw_customers_v') }}
 )
 
-select 
-    id as customer_id,
-    first_name,
-    last_name
+select
+try_to_number(id) as customer_id,
+first_name, 
+last_name,
+created_at,
+updated_at
 from raw_customers_v

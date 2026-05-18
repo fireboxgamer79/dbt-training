@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: raw_customers_v
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: raw_orders_v
+    columns:
+      - name: user_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('raw_customers_v')
+                field: id
+        
